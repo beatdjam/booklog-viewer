@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@datorama/akita": "^6.1.3"
+  },
+  "devDependencies": {
+    "@datorama/akita-ngdevtools": "^6.0.1"
+  },
+  "akitaCli": {
+    "customFolderName": "true",
+    "template": "angular",
+    "basePath": "./src/app"
+  }
+}
