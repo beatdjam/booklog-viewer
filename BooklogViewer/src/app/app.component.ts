@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import { tap } from 'rxjs';
-import {AllRepository} from "./repository/all.repository";
 
 @Component({
   selector: 'app-root',
@@ -8,12 +6,9 @@ import {AllRepository} from "./repository/all.repository";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  constructor(private repository: AllRepository) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.repository.getAllData().pipe(
-      tap(resp => resp.books.map(book => console.log(book.title)))
-    ).subscribe();
   }
 }
