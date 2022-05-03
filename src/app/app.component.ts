@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
 
     submit() {
         this.readAsText(this.file!).then(result => {
+            // TODO タグとか入ってる項目があるのでcsvのパースは自前じゃなくてなんかのライブラリ使う
             const items = result.split('\r\n').map(row => {
                 const r = row.split(",").map(value => value.substring(1, value.length - 1));
                 return new Item(
@@ -50,11 +51,11 @@ export class AppComponent implements OnInit {
                     r[15],
                     r[16]);
             });
-            console.log(items[0]);
-            return this.input = result;
+            return this.input = items.map(item => item.title).join('\r\n ');
         })
     }
 
+    // csv読み込み
     private readAsText(file: File): Promise<string> {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
