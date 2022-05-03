@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
+import {parse} from 'csv-parse';
 
 @Component({
     selector: 'app-root',
@@ -29,29 +30,29 @@ export class AppComponent implements OnInit {
 
     submit() {
         this.readAsText(this.file!).then(result => {
-            // TODO タグとか入ってる項目があるのでcsvのパースは自前じゃなくてなんかのライブラリ使う
-            const items = result.split('\r\n').map(row => {
-                const r = row.split(",").map(value => value.substring(1, value.length - 1));
-                return new Item(
-                    r[0],
-                    r[1],
-                    r[2],
-                    r[3],
-                    r[4],
-                    r[5],
-                    r[6],
-                    r[7],
-                    r[8],
-                    r[9],
-                    r[10],
-                    r[11],
-                    r[12],
-                    r[13],
-                    r[14],
-                    r[15],
-                    r[16]);
+            parse(result).on('data', (data) => {
+                const array = data as string[];
+                const item = new Item(
+                    array[0],
+                    array[1],
+                    array[2],
+                    array[3],
+                    array[4],
+                    array[5],
+                    array[6],
+                    array[7],
+                    array[8],
+                    array[9],
+                    array[10],
+                    array[11],
+                    array[12],
+                    array[13],
+                    array[14],
+                    array[15],
+                    array[16],
+                );
+                console.log(item);
             });
-            return this.input = items.map(item => item.title).join('\r\n ');
         })
     }
 
@@ -59,12 +60,8 @@ export class AppComponent implements OnInit {
     private readAsText(file: File): Promise<string> {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = () => {
-                resolve(reader.result as string);
-            };
-            reader.onerror = () => {
-                reject(reader.error);
-            };
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = () => reject(reader.error);
             reader.readAsText(file, 'shift-jis');
         });
     }
