@@ -1,0 +1,7 @@
+<ng-container *ngIf="itemCount$ | async as itemCount">
+    <ul>
+        <li *ngFor="let item of itemCount | keyvalue">
+            {{ item.key }}: {{ item.value }}
+        </li>
+    </ul>
+</ng-container>

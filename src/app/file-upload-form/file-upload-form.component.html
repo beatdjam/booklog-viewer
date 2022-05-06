@@ -6,18 +6,9 @@
                 id="file"
                 type="file"
                 class="form-control"
+                accept=".csv"
                 (change)="onFileChange($event)">
         >
-        <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
-            <div *ngIf="f['file'].errors?.['required']">File is required.</div>
-        </div>
     </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button *ngIf="file" class="btn btn-primary" type="submit">Submit</button>
 </form>
-<ng-container *ngIf="itemCount$ | async as itemCount">
-    <ul>
-        <li *ngFor="let item of itemCount | keyvalue">
-            {{ item.key }}: {{ item.value }}
-        </li>
-    </ul>
-</ng-container>

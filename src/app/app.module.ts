@@ -7,11 +7,13 @@ import {environment} from "../environments/environment";
 import {AkitaNgDevtools} from "@datorama/akita-ngdevtools";
 import {ReactiveFormsModule} from "@angular/forms";
 import { FileUploadFormComponent } from './file-upload-form/file-upload-form.component';
+import { StatusCountComponent } from './status-count/status-count.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileUploadFormComponent
+    FileUploadFormComponent,
+    StatusCountComponent
   ],
   imports: [
     environment.production ? [] : AkitaNgDevtools.forRoot(),

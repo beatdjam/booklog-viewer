@@ -3,9 +3,6 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {parse} from "csv-parse/sync";
 import {Item} from "./file-upload-form.model";
 import {BooklogItemsStore} from "../state/booklog-items/booklog-items.store";
-import {BooklogItemsQuery} from "../state/booklog-items/booklog-items.query";
-import {map} from "rxjs";
-import {BooklogItem} from "../state/booklog-items/booklog-item.model";
 
 @Component({
     selector: 'app-file-upload-form',
@@ -15,22 +12,8 @@ import {BooklogItem} from "../state/booklog-items/booklog-item.model";
 export class FileUploadFormComponent implements OnInit {
     form = this.fb.group({file: ['', [Validators.required]]});
     file: File | null = null;
-    itemCount$ = this.booklogItemsQuery.selectAll()
-        .pipe(map(items => this.countByStatus(items)));
 
-    private countByStatus(items: BooklogItem[]) {
-        const count = new Map<string, number>();
-        items.forEach(item => {
-            if (count.get(item.status)) {
-                count.set(item.status, count.get(item.status)! + 1);
-            } else {
-                count.set(item.status, 1);
-            }
-        });
-        return count;
-    }
-
-    constructor(private fb: FormBuilder, private itemStore: BooklogItemsStore, private booklogItemsQuery: BooklogItemsQuery) {
+    constructor(private fb: FormBuilder, private itemStore: BooklogItemsStore) {
     }
 
     get f() {
