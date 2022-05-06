@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {parse} from "csv-parse";
+import {parse} from "csv-parse/sync";
 import {Item} from "./file-upload-form.model";
+import {BooklogItemsStore} from "../state/booklog-items/booklog-items.store";
+import {BooklogItemsQuery} from "../state/booklog-items/booklog-items.query";
+import {map} from "rxjs";
+import {BooklogItem} from "../state/booklog-items/booklog-item.model";
 
 @Component({
     selector: 'app-file-upload-form',
@@ -11,10 +15,22 @@ import {Item} from "./file-upload-form.model";
 export class FileUploadFormComponent implements OnInit {
     form = this.fb.group({file: ['', [Validators.required]]});
     file: File | null = null;
-    items: Item[] = [];
-    input = "";
+    itemCount$ = this.booklogItemsQuery.selectAll()
+        .pipe(map(items => this.countByStatus(items)));
 
-    constructor(private fb: FormBuilder) {
+    private countByStatus(items: BooklogItem[]) {
+        const count = new Map<string, number>();
+        items.forEach(item => {
+            if (count.get(item.status)) {
+                count.set(item.status, count.get(item.status)! + 1);
+            } else {
+                count.set(item.status, 1);
+            }
+        });
+        return count;
+    }
+
+    constructor(private fb: FormBuilder, private itemStore: BooklogItemsStore, private booklogItemsQuery: BooklogItemsQuery) {
     }
 
     get f() {
@@ -28,57 +44,38 @@ export class FileUploadFormComponent implements OnInit {
         if (event.target.files.length > 0) {
             this.file = event.target.files[0];
         }
-        this.items = [];
-        this.input = "";
     }
 
     submit() {
-        console.log("submit");
-        this.readAsText(this.file!)
-            .then(result => {
-                // FIXME CSVのライブラリを勧められたやつに差し替える
-                parse(result).on('data', (data) => {
-                    const array = data as string[];
-                    const item = new Item(
-                        array[0],
-                        array[1],
-                        array[2],
-                        array[3],
-                        array[4],
-                        array[5],
-                        array[6],
-                        array[7],
-                        array[8],
-                        array[9],
-                        array[10],
-                        array[11],
-                        array[12],
-                        array[13],
-                        array[14],
-                        array[15],
-                        array[16],
-                    );
-                    this.items.push(item);
-                });
-            })
-            .then(() => {
-                // FIXME ここうまく実行されてない
-                // そもそもStoreに入れる処理に変える
-                const count = new Map<string, number>();
-                this.items.forEach(item => {
-                    if (count.get(item.status)) {
-                        count.set(item.status, count.get(item.status)! + 1);
-                    } else {
-                        count.set(item.status, 1);
-                    }
-                });
-                for (let elem of count) {
-                    console.log(elem[0] + ": " + elem[1]);
-                }
-            });
+        this.readAsText(this.file!).then(result => this.itemStore.set(this.parseCSV(result)));
     }
 
-    // csv読み込み
+    private parseCSV(result: string) {
+        const records = parse(result) as string[][];
+        return records.map(record => {
+            return new Item(
+                record[0],
+                record[1],
+                record[2],
+                record[3],
+                record[4],
+                record[5],
+                record[6],
+                record[7],
+                record[8],
+                record[9],
+                record[10],
+                record[11],
+                record[12],
+                record[13],
+                record[14],
+                record[15],
+                record[16],
+            )
+        });
+    }
+
+    // アップロードされたファイルを読み込み、テキストとして返す
     private readAsText(file: File): Promise<string> {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -88,3 +85,4 @@ export class FileUploadFormComponent implements OnInit {
         });
     }
 }
+
