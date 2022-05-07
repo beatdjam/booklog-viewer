@@ -8,6 +8,7 @@ import {AkitaNgDevtools} from "@datorama/akita-ngdevtools";
 import {ReactiveFormsModule} from "@angular/forms";
 import { FileUploadFormComponent } from './file-upload-form/file-upload-form.component';
 import { StatusCountComponent } from './status-count/status-count.component';
+import {NgChartsModule} from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { StatusCountComponent } from './status-count/status-count.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

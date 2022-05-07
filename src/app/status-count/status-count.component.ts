@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {map} from "rxjs";
 import {BooklogItem} from "../state/booklog-items/booklog-item.model";
 import {BooklogItemsQuery} from "../state/booklog-items/booklog-items.query";
+import {ChartType} from "chart.js";
 
 @Component({
     selector: 'app-status-count',
@@ -9,8 +10,16 @@ import {BooklogItemsQuery} from "../state/booklog-items/booklog-items.query";
     styleUrls: ['./status-count.component.scss']
 })
 export class StatusCountComponent implements OnInit {
-    itemCount$ = this.booklogItemsQuery.selectAll()
-        .pipe(map(items => this.countByStatus(items)));
+    chartData$ = this.booklogItemsQuery.selectAll()
+        .pipe(map(items => this.countByStatus(items)))
+        .pipe(map(itemCount => {
+            return {
+                labels: [...itemCount.keys()],
+                datasets: [{data: [...itemCount.values()]},]
+            }
+        }));
+
+    chartType: ChartType = "doughnut";
 
     private countByStatus(items: BooklogItem[]) {
         const count = new Map<string, number>();

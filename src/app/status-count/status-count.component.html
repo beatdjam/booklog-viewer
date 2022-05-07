@@ -1,7 +1,5 @@
-<ng-container *ngIf="itemCount$ | async as itemCount">
-    <ul>
-        <li *ngFor="let item of itemCount | keyvalue">
-            {{ item.key }}: {{ item.value }}
-        </li>
-    </ul>
+<ng-container *ngIf="chartData$ | async as chartData$">
+    <div style="display: block">
+        <canvas baseChart [data]="chartData$" [type]="chartType"></canvas>
+    </div>
 </ng-container>
