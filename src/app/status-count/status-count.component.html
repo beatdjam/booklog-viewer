@@ -1,10 +1,10 @@
 <ng-container *ngIf="state$ | async as state">
     <div>
         <canvas baseChart [data]="state.chartData" [type]="'doughnut'"></canvas>
+        <ul>
+            <li *ngFor="let item of state.itemCount | keyvalue">
+                {{ item.key }}: {{ item.value }}冊
+            </li>
+        </ul>
     </div>
-    <ul>
-        <li *ngFor="let item of state.itemCount | keyvalue">
-            {{ item.key }}: {{ item.value }}冊
-        </li>
-    </ul>
 </ng-container>
