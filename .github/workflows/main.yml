@@ -16,7 +16,7 @@ jobs:
     - name: Install NPM packages
       run: npm ci
     - name: Build website
-      run: npm run build --if-present -- --prod
+      run: npm run build --if-present -- --prod --deployUrl /booklog-viewer/
     - name: Test
       run: npm test -- --watch=false --browsers=ChromeHeadless
     - name: Deploy 
