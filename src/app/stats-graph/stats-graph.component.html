@@ -1,5 +1,6 @@
 <ng-container *ngIf="state$ | async as state">
-    <div>
+    <!-- TODO 暫定で読み込み時に棒グラフを出す -->
+    <div *ngIf="state.itemCount.size > 0">
         <canvas baseChart [data]="state.chartData" [type]="'bar'"></canvas>
     </div>
 </ng-container>
