@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {map} from "rxjs";
-import {StatusCountViewModel} from "../status-count/status-count.viewmodel";
+import {filter, map} from "rxjs";
 import {BooklogItemsQuery} from "../state/booklog-items/booklog-items.query";
+import {StatusGraphViewModel} from "./status-graph.viewmodel";
 
 @Component({
     selector: 'app-stats-graph',
@@ -10,7 +10,10 @@ import {BooklogItemsQuery} from "../state/booklog-items/booklog-items.query";
 })
 export class StatsGraphComponent implements OnInit {
     state$ = this.booklogItemsQuery.selectAll()
-        .pipe(map(items => new StatusCountViewModel(items)));
+        .pipe(
+            filter(items => items.length > 0),
+            map(items => new StatusGraphViewModel(items))
+        );
 
     constructor(private booklogItemsQuery: BooklogItemsQuery) {
     }
