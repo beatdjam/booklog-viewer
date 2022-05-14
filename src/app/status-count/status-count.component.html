@@ -1,13 +1,15 @@
-<ng-container *ngIf="state$ | async as state">
-    <h2>Overview</h2>
-    <div>
+<ng-container *ngIf="(state$ | async) as state">
+    <ng-container *ngIf="state.itemCount.size > 0">
+        <h2>Overview</h2>
         <div>
-            <canvas baseChart [data]="state.chartData" [type]="'doughnut'"></canvas>
+            <div>
+                <canvas baseChart [data]="state.chartData" [type]="'doughnut'"></canvas>
+            </div>
+            <ul>
+                <li *ngFor="let item of state.itemCount | keyvalue">
+                    {{ item.key }}: {{ item.value }}冊
+                </li>
+            </ul>
         </div>
-        <ul>
-            <li *ngFor="let item of state.itemCount | keyvalue">
-                {{ item.key }}: {{ item.value }}冊
-            </li>
-        </ul>
-    </div>
+    </ng-container>
 </ng-container>
