@@ -1,6 +1,9 @@
 <ng-container *ngIf="state$ | async as state">
+    <h2>Overview</h2>
     <div>
-        <canvas baseChart [data]="state.chartData" [type]="'doughnut'"></canvas>
+        <div>
+            <canvas baseChart [data]="state.chartData" [type]="'doughnut'"></canvas>
+        </div>
         <ul>
             <li *ngFor="let item of state.itemCount | keyvalue">
                 {{ item.key }}: {{ item.value }}冊
