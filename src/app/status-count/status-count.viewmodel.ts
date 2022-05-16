@@ -6,7 +6,7 @@ export class StatusCountViewModel {
     public itemCount: Map<string, number>;
 
     constructor(items: BooklogItem[]) {
-        this.itemCount = this.countByStatus(items)
+        this.itemCount = this.countByStatus(items);
         this.chartData = {
             labels: [...this.itemCount.keys()],
             datasets: [{data: [...this.itemCount.values()]},]
