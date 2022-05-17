@@ -10,13 +10,15 @@ import { FileUploadFormComponent } from './file-upload-form/file-upload-form.com
 import { StatusCountComponent } from './status-count/status-count.component';
 import {NgChartsModule} from "ng2-charts";
 import { StatsGraphComponent } from './stats-graph/stats-graph.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FileUploadFormComponent,
     StatusCountComponent,
-    StatsGraphComponent
+    StatsGraphComponent,
+    TableComponent
   ],
   imports: [
     environment.production ? [] : AkitaNgDevtools.forRoot(),
