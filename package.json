@@ -24,6 +24,7 @@
     "csv-parse": "^5.0.4",
     "fast-csv": "^4.3.6",
     "ng2-charts": "^3.0.10",
+    "normalize.css": "^8.0.1",
     "rxjs": "~7.5.0",
     "stream-browserify": "^3.0.0",
     "tslib": "^2.3.0",
