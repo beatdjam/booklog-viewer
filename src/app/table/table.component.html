@@ -1,50 +1,36 @@
-<div class="table">
-    <div class="header">
-        <ul class="row">
-            <li class="empty">&nbsp;</li>
-            <li>
-                <div class="year">2021年</div>
-                <div class="month">1月</div>
-            </li>
-            <li>
-                <div class="year">&nbsp;</div>
-                <div class="month">2月</div>
-            </li>
-            <li>
-                <div class="year">&nbsp;</div>
-                <div class="month">3月</div>
-            </li>
-            <li>
-                <div>&nbsp;</div>
-                <div class="sum">合計</div>
-            </li>
-        </ul>
+<ng-container *ngIf="state$ | async as state">
+    <div class="table">
+        <div class="header">
+            <ul class="row">
+                <li class="empty">&nbsp;</li>
+                <li *ngFor="let header of state.headers">
+                    <ng-container [ngSwitch]="header.year">
+                        <div *ngSwitchCase="''" class="year">&nbsp;</div>
+                        <div *ngSwitchDefault class="year">{{header.year}}年</div>
+                    </ng-container>
+                    <div class="month">{{header.month}}月</div>
+                </li>
+                <li>
+                    <div>&nbsp;</div>
+                    <div class="sum">合計</div>
+                </li>
+            </ul>
+        </div>
+        <div class="data" *ngFor="let dataSet of state.dataSets">
+            <ul class="row">
+                <li class="status">{{dataSet.label}}</li>
+                <li class="count" *ngFor="let num of dataSet.data">{{num}}</li>
+                <li class="count sum">{{dataSet.sum}}</li>
+            </ul>
+        </div>
+        <!--        <div class="data">-->
+        <!--            <ul class="row">-->
+        <!--                <li class="status sum">合計</li>-->
+        <!--                <li class="count sum">0</li>-->
+        <!--                <li class="count sum">2</li>-->
+        <!--                <li class="count sum">4</li>-->
+        <!--                <li class="count sum">6</li>-->
+        <!--            </ul>-->
+        <!--        </div>-->
     </div>
-    <div class="data">
-        <ul class="row">
-            <li class="status">未設定</li>
-            <li class="count">0</li>
-            <li class="count">1</li>
-            <li class="count">2</li>
-            <li class="count sum">3</li>
-        </ul>
-    </div>
-    <div class="data">
-        <ul class="row">
-            <li class="status">積読</li>
-            <li class="count">0</li>
-            <li class="count">1</li>
-            <li class="count">2</li>
-            <li class="count sum">3</li>
-        </ul>
-    </div>
-    <div class="data">
-        <ul class="row">
-            <li class="status sum">合計</li>
-            <li class="count sum">0</li>
-            <li class="count sum">2</li>
-            <li class="count sum">4</li>
-            <li class="count sum">6</li>
-        </ul>
-    </div>
-</div>
+</ng-container>
