@@ -1,0 +1,28 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  >li:first-child {
+    background-color: aquamarine;
+    width: 200px;
+  }
+  >li:last-child {
+    border-right: solid;
+  }
+  >li {
+    list-style: none;
+    width: 50px;
+    text-align: right;
+    border: solid;
+    border-right: none;
+    border-bottom: none;
+    >div {
+      background-color: khaki;
+      .month {
+        text-align: right;
+      }
+    }
+  }
+}
+
