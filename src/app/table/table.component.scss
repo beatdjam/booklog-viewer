@@ -3,22 +3,32 @@
   flex-direction: row;
   padding: 0;
   margin: 0;
-  >li:first-child {
-    background-color: aquamarine;
-    width: 200px;
-  }
-  >li:last-child {
-    border-right: solid;
-  }
-  >li {
+
+  > li {
     list-style: none;
-    width: 50px;
+    width: 60px;
     text-align: right;
-    border: solid;
-    border-right: none;
-    border-bottom: none;
-    >div {
-      background-color: khaki;
+    border: 1px solid #e4e4e4;
+    margin-left: -1px;
+    margin-top: -1px;
+
+    &:first-child {
+      width: 200px;
+
+      &.status {
+        border: 1px solid #e4e4e4;
+        background-color: #f3f3f3;
+      }
+
+      &.empty {
+        border: none;
+        margin-right: 3px;
+      }
+    }
+
+    > div {
+      background-color: #f4f2e7;
+
       .month {
         text-align: right;
       }
@@ -26,3 +36,6 @@
   }
 }
 
+.sum {
+  font-weight: bold;
+}
