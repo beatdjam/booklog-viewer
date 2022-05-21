@@ -22,9 +22,13 @@ export class TableComponent implements OnInit {
     }
 }
 
+type HeaderLabel = { year: string, month: string }
+type TableDataRow = { data: number[]; label: string; stack: string; sum: number };
+
 class TableViewModel {
-    public headers: { year: string, month: string }[]
-    public dataSets: { data: number[]; label: string; stack: string; sum: number }[];
+    public headers: HeaderLabel[]
+    public dataSets: TableDataRow[];
+    public sumRow: TableDataRow;
 
     constructor(items: BooklogItem[]) {
         const sorted = items.sort((a, b) => {
@@ -35,10 +39,34 @@ class TableViewModel {
 
         const labels = TableViewModel.createMonthLabels(sorted);
         this.headers = this.createHeader(labels);
-        this.dataSets = this.createDataSets(items, labels)
+        this.dataSets = this.createDataSets(items, labels);
+        this.sumRow = this.createSumRow(this.dataSets);
     }
 
+    /**
+     * 合計行作成
+     */
+    private createSumRow(dataSets: TableDataRow[]) {
+        // data部分の集計
+        const sumData: number[] = [];
+        const length = dataSets[0]?.data.length;
+        for (let index = 0; index < length; index++) {
+            const sum = dataSets.map(dataSet => dataSet.data[index]).reduce((a, b) => a + b, 0);
+            sumData.push(sum);
+        }
+        // 合計部分の集計
+        const sums = dataSets.map(dataSet => dataSet.sum).reduce((a, b) => a + b, 0);
+        return {
+            data: sumData,
+            label: "",
+            stack: '',
+            sum: sums
+        };
+    }
 
+    /**
+     * データの先頭か1月の場合はラベルに西暦年をつける
+     */
     private createHeader(label: string[]) {
         return label.map((l, i) => {
             const [year, month] = l.split("-");
@@ -52,6 +80,7 @@ class TableViewModel {
 
     /**
      * 月・ステータス別のデータセットを作成する
+     * FIXME 共通化する
      */
     private createDataSets(items: BooklogItem[], labels: string[]) {
         // statusの一覧
@@ -74,7 +103,6 @@ class TableViewModel {
      */
     private static createMonthLabels(sorted: BooklogItem[]): string[] {
         const labels: string[] = [];
-
         const oldestDate = new Date(sorted[0]?.createAt);
         const now = new Date();
         let currentDate = new Date(oldestDate.getFullYear(), oldestDate.getMonth(), 1);

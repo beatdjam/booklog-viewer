@@ -23,14 +23,12 @@
                 <li class="count sum">{{dataSet.sum}}</li>
             </ul>
         </div>
-        <!--        <div class="data">-->
-        <!--            <ul class="row">-->
-        <!--                <li class="status sum">合計</li>-->
-        <!--                <li class="count sum">0</li>-->
-        <!--                <li class="count sum">2</li>-->
-        <!--                <li class="count sum">4</li>-->
-        <!--                <li class="count sum">6</li>-->
-        <!--            </ul>-->
-        <!--        </div>-->
+        <div class="data">
+            <ul class="row">
+                <li class="status sum">本棚登録数</li>
+                <li class="count sum" *ngFor="let num of state.sumRow.data">{{num}}</li>
+                <li class="count sum">{{state.sumRow.sum}}</li>
+            </ul>
+        </div>
     </div>
 </ng-container>

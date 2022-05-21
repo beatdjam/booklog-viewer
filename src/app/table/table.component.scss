@@ -6,14 +6,14 @@
 
   > li {
     list-style: none;
-    width: 60px;
+    min-width: 60px;
     text-align: right;
     border: 1px solid #e4e4e4;
     margin-left: -1px;
     margin-top: -1px;
 
     &:first-child {
-      width: 130px;
+      min-width: 130px;
 
       &.status {
         border: 1px solid #e4e4e4;
@@ -38,4 +38,8 @@
 
 .sum {
   font-weight: bold;
+}
+
+.table {
+  overflow-x: auto;
 }
