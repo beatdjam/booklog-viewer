@@ -1,5 +1,5 @@
 import {ChartData} from "chart.js";
-import {BooklogItem} from "../state/booklog-items/booklog-item.model";
+import {BooklogItem} from "../../state/booklog-items/booklog-item.model";
 
 export class StatusGraphViewModel {
     public chartData: ChartData;
@@ -21,6 +21,7 @@ export class StatusGraphViewModel {
      * 月・ステータス別のデータセットを作成する
      */
     private createDataSets(items: BooklogItem[], labels: string[]) {
+        // statusの一覧
         const datasetLabels = [...new Set(items.map(item => item.status))];
         return datasetLabels.map(datasetLabel => {
             const filteredByStatus = items.filter(item => item.status === datasetLabel);
@@ -35,8 +36,9 @@ export class StatusGraphViewModel {
 
     /**
      * 配列内に存在する最古から現在時点までの月ラベルを作成する
+     * FIXME 共通化する
      */
-    private static createMonthLabels(sorted: BooklogItem[]): string[] {
+    static createMonthLabels(sorted: BooklogItem[]): string[] {
         const labels: string[] = [];
 
         const oldestDate = new Date(sorted[0]?.createAt);

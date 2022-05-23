@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BooklogItem} from "../state/booklog-items/booklog-item.model";
+import {BooklogItem} from "../../state/booklog-items/booklog-item.model";
 import {filter, map} from "rxjs";
-import {BooklogItemsQuery} from "../state/booklog-items/booklog-items.query";
+import {BooklogItemsQuery} from "../../state/booklog-items/booklog-items.query";
 
 @Component({
     selector: 'app-table',

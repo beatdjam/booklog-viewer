@@ -1,4 +1,4 @@
-import {BooklogItem} from "../state/booklog-items/booklog-item.model";
+import {BooklogItem} from "../../state/booklog-items/booklog-item.model";
 import {StatusCountViewModel} from "./status-count.viewmodel";
 
 describe('StatusCountViewModel', () => {

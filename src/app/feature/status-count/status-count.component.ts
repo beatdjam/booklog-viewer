@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {map} from "rxjs";
-import {BooklogItemsQuery} from "../state/booklog-items/booklog-items.query";
+import {BooklogItemsQuery} from "../../state/booklog-items/booklog-items.query";
 import {StatusCountViewModel} from "./status-count.viewmodel";
 
 @Component({

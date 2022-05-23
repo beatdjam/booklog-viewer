@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {parse} from "csv-parse/sync";
 import {Item} from "./file-upload-form.model";
-import {BooklogItemsStore} from "../state/booklog-items/booklog-items.store";
+import {BooklogItemsStore} from "../../state/booklog-items/booklog-items.store";
 
 @Component({
     selector: 'app-file-upload-form',

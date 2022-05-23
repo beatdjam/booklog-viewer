@@ -6,11 +6,11 @@ import {AppComponent} from './app.component';
 import {environment} from "../environments/environment";
 import {AkitaNgDevtools} from "@datorama/akita-ngdevtools";
 import {ReactiveFormsModule} from "@angular/forms";
-import { FileUploadFormComponent } from './file-upload-form/file-upload-form.component';
-import { StatusCountComponent } from './status-count/status-count.component';
+import { FileUploadFormComponent } from './feature/file-upload-form/file-upload-form.component';
+import { StatusCountComponent } from './feature/status-count/status-count.component';
 import {NgChartsModule} from "ng2-charts";
-import { StatsGraphComponent } from './stats-graph/stats-graph.component';
-import { TableComponent } from './table/table.component';
+import { StatsGraphComponent } from './feature/stats-graph/stats-graph.component';
+import { TableComponent } from './feature/table/table.component';
 
 @NgModule({
   declarations: [
