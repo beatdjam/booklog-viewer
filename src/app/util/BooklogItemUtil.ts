@@ -1,5 +1,7 @@
 import {BooklogItem} from "../state/booklog-items/booklog-item.model";
+import {TableDataRow} from "../model/tableDataRow";
 
+// Note: 親オブジェクト作ってそこに持たせるか悩んでる
 /**
  * 配列内に存在する最古から現在時点までの月ラベルを作成する
  */
@@ -16,4 +18,31 @@ export function createMonthLabels(sorted: BooklogItem[]): string[] {
         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
     }
     return labels;
+}
+
+/**
+ * 月・ステータス別のデータセットを作成する
+ */
+export function createDataSets(items: BooklogItem[], labels: string[]): TableDataRow[] {
+    // statusの一覧
+    const datasetLabels = [...new Set(items.map(item => item.status))];
+    return datasetLabels.map(datasetLabel => {
+        const filteredByStatus = items.filter(item => item.status === datasetLabel);
+        const data = labels.map(label => filteredByStatus.filter(item => item.createAt.indexOf(label) === 0).length);
+        return {
+            data: data,
+            label: datasetLabel,
+            stack: 'a',
+            sum: data.reduce((a, b) => a + b, 0)
+        };
+    });
+}
+
+// TODO QueryEntityのsortBy, sortByOrderに書き換える
+export function sortByCreatedAt(items: BooklogItem[]): BooklogItem[] {
+    return items.sort((a, b) => {
+        if (a.createAt > b.createAt) return 1;
+        if (a.createAt < b.createAt) return -1;
+        return 0;
+    });
 }

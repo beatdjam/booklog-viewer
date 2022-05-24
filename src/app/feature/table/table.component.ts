@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {BooklogItem} from "../../state/booklog-items/booklog-item.model";
 import {filter, map} from "rxjs";
 import {BooklogItemsQuery} from "../../state/booklog-items/booklog-items.query";
-import {createMonthLabels} from "../../util/BooklogItemUtil";
+import {createDataSets, createMonthLabels, sortByCreatedAt} from "../../util/BooklogItemUtil";
+import {TableDataRow} from "../../model/tableDataRow";
+import {HeaderLabel} from "../../model/headerLabel";
 
 @Component({
     selector: 'app-table',
@@ -23,24 +25,16 @@ export class TableComponent implements OnInit {
     }
 }
 
-type HeaderLabel = { year: string, month: string }
-type TableDataRow = { data: number[]; label: string; stack: string; sum: number };
-
 class TableViewModel {
     public headers: HeaderLabel[]
     public dataSets: TableDataRow[];
     public sumRow: TableDataRow;
 
     constructor(items: BooklogItem[]) {
-        const sorted = items.sort((a, b) => {
-            if (a.createAt > b.createAt) return 1;
-            if (a.createAt < b.createAt) return -1;
-            return 0;
-        });
-
+        const sorted = sortByCreatedAt(items);
         const labels = createMonthLabels(sorted);
         this.headers = this.createHeader(labels);
-        this.dataSets = this.createDataSets(items, labels);
+        this.dataSets = createDataSets(items, labels);
         this.sumRow = this.createSumRow(this.dataSets);
     }
 
@@ -76,25 +70,6 @@ class TableViewModel {
                 year: dispYear,
                 month: parseInt(month).toString()
             }
-        });
-    }
-
-    /**
-     * 月・ステータス別のデータセットを作成する
-     * FIXME 共通化する
-     */
-    private createDataSets(items: BooklogItem[], labels: string[]) {
-        // statusの一覧
-        const datasetLabels = [...new Set(items.map(item => item.status))];
-        return datasetLabels.map(datasetLabel => {
-            const filteredByStatus = items.filter(item => item.status === datasetLabel);
-            const data = labels.map(label => filteredByStatus.filter(item => item.createAt.indexOf(label) === 0).length);
-            return {
-                data: data,
-                label: datasetLabel,
-                stack: 'a',
-                sum: data.reduce((a, b) => a + b, 0)
-            };
         });
     }
 }

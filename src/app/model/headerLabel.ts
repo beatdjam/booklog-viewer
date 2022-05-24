@@ -1,0 +1,1 @@
+export type HeaderLabel = { year: string, month: string }
