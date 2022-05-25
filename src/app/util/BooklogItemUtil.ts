@@ -38,6 +38,27 @@ export function createDataSets(items: BooklogItem[], labels: string[]): TableDat
     });
 }
 
+/**
+ * 合計行作成
+ */
+export function summariseDataRow(dataSets: TableDataRow[]): TableDataRow {
+    // data部分の集計
+    const sumData: number[] = [];
+    const length = dataSets[0]?.data.length;
+    for (let index = 0; index < length; index++) {
+        const sum = dataSets.map(dataSet => dataSet.data[index]).reduce((a, b) => a + b, 0);
+        sumData.push(sum);
+    }
+    // 合計部分の集計
+    const sums = dataSets.map(dataSet => dataSet.sum).reduce((a, b) => a + b, 0);
+    return {
+        data: sumData,
+        label: "",
+        stack: '',
+        sum: sums
+    };
+}
+
 // TODO QueryEntityのsortBy, sortByOrderに書き換える
 export function sortByCreatedAt(items: BooklogItem[]): BooklogItem[] {
     return items.sort((a, b) => {
