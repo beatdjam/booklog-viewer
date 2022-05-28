@@ -18,7 +18,19 @@ jobs:
     - name: Build website
       run: npm run build --if-present -- --configuration production --base-href /booklog-viewer/
     - name: Test
-      run: npm test -- --watch=false --browsers=ChromeHeadless
+      run: |
+        SUMMARY="$(npm test -- --watch=false --browsers=ChromeHeadless | tail -2 | head -1)"
+        TOKENS=($SUMMARY)
+        echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+    - name: Create the Badge
+      uses: schneegans/dynamic-badges-action@v1.4.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: 654861a0fbd9a93538a554b9be88a205
+        filename: coverage.json
+        label: Coverage
+        message: ${{ env.COVERAGE }}
+        valColorRange: green
     - name: Deploy 
       uses: JamesIves/github-pages-deploy-action@v4
       with:
