@@ -1,18 +1,14 @@
-import {createDataSets, createMonthLabels, summariseDataRow} from "../../util/BooklogItemUtil";
 import {HeaderLabel} from "../../model/HeaderLabel";
-import {TableDataRow} from "../../model/TableDataRow";
+import {TableData} from "../../model/TableData";
 import {BooklogItem} from "../../model/BooklogItem";
 
 export class TableViewModel {
     public headers: HeaderLabel[]
-    public dataSets: TableDataRow[];
-    public sumRow: TableDataRow;
+    public tableData: TableData;
 
     constructor(items: BooklogItem[]) {
-        const labels = createMonthLabels(items);
-        this.headers = this.createHeader(labels);
-        this.dataSets = createDataSets(items, labels);
-        this.sumRow = summariseDataRow(this.dataSets);
+        this.tableData = new TableData(items);
+        this.headers = this.createHeader(this.tableData.labels);
     }
 
     /**

@@ -16,7 +16,7 @@
                 </li>
             </ul>
         </div>
-        <div class="data" *ngFor="let dataSet of state.dataSets">
+        <div class="data" *ngFor="let dataSet of state.tableData.dataSets">
             <ul class="row">
                 <li class="status">{{dataSet.label}}</li>
                 <li class="count" *ngFor="let num of dataSet.data">{{num}}</li>
@@ -26,8 +26,8 @@
         <div class="data">
             <ul class="row">
                 <li class="status sum">本棚登録数</li>
-                <li class="count sum" *ngFor="let num of state.sumRow.data">{{num}}</li>
-                <li class="count sum">{{state.sumRow.sum}}</li>
+                <li class="count sum" *ngFor="let num of state.tableData.sumRow.data">{{num}}</li>
+                <li class="count sum">{{state.tableData.sumRow.sum}}</li>
             </ul>
         </div>
     </div>

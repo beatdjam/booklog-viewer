@@ -1,1 +1,0 @@
-export type TableDataRow = { data: number[]; label: string; stack: string; sum: number };
