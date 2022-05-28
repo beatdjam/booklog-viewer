@@ -58,12 +58,3 @@ export function summariseDataRow(dataSets: TableDataRow[]): TableDataRow {
         sum: sums
     };
 }
-
-// TODO QueryEntityのsortBy, sortByOrderに書き換える
-export function sortByCreatedAt(items: BooklogItem[]): BooklogItem[] {
-    return items.sort((a, b) => {
-        if (a.createAt > b.createAt) return 1;
-        if (a.createAt < b.createAt) return -1;
-        return 0;
-    });
-}

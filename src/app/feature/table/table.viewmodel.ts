@@ -1,4 +1,4 @@
-import {createDataSets, createMonthLabels, sortByCreatedAt, summariseDataRow} from "../../util/BooklogItemUtil";
+import {createDataSets, createMonthLabels, summariseDataRow} from "../../util/BooklogItemUtil";
 import {HeaderLabel} from "../../model/HeaderLabel";
 import {TableDataRow} from "../../model/TableDataRow";
 import {BooklogItem} from "../../model/BooklogItem";
@@ -9,8 +9,7 @@ export class TableViewModel {
     public sumRow: TableDataRow;
 
     constructor(items: BooklogItem[]) {
-        const sorted = sortByCreatedAt(items);
-        const labels = createMonthLabels(sorted);
+        const labels = createMonthLabels(items);
         this.headers = this.createHeader(labels);
         this.dataSets = createDataSets(items, labels);
         this.sumRow = summariseDataRow(this.dataSets);
