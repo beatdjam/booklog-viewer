@@ -1,7 +1,7 @@
-import {HeaderLabel} from "../../model/headerLabel";
-import {TableDataRow} from "../../model/tableDataRow";
 import {BooklogItem} from "../../state/booklog-items/booklog-item.model";
 import {createDataSets, createMonthLabels, sortByCreatedAt, summariseDataRow} from "../../util/BooklogItemUtil";
+import {HeaderLabel} from "../../model/HeaderLabel";
+import {TableDataRow} from "../../model/TableDataRow";
 
 export class TableViewModel {
     public headers: HeaderLabel[]
