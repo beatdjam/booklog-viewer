@@ -30,7 +30,7 @@ jobs:
         filename: coverage.json
         label: Coverage
         message: ${{ env.COVERAGE }}
-        valColorRange: green
+        color: brightgreen
     - name: Deploy 
       uses: JamesIves/github-pages-deploy-action@v4
       with:
