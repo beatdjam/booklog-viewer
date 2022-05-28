@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
-import { BooklogItem } from './booklog-item.model';
+import {BooklogItem} from "../../model/BooklogItem";
 
 export interface BooklogItemsState extends EntityState<BooklogItem> {}
 

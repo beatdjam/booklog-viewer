@@ -1,6 +1,6 @@
 import {ChartData} from "chart.js";
-import {BooklogItem} from "../../state/booklog-items/booklog-item.model";
 import {createDataSets, createMonthLabels, sortByCreatedAt} from "../../util/BooklogItemUtil";
+import {BooklogItem} from "../../model/BooklogItem";
 
 export class StatusGraphViewModel {
     public chartData: ChartData;

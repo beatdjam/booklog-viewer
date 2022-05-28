@@ -1,5 +1,5 @@
-import {BooklogItem} from "../state/booklog-items/booklog-item.model";
 import {TableDataRow} from "../model/TableDataRow";
+import {BooklogItem} from "../model/BooklogItem";
 
 // Note: 親オブジェクト作ってそこに持たせるか悩んでる
 /**
