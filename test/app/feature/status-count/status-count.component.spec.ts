@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatusCountComponent } from './status-count.component';
+import { StatusCountComponent } from '../../../../src/app/feature/status-count/status-count.component';
 
 describe('StatusCountComponent', () => {
   let component: StatusCountComponent;
