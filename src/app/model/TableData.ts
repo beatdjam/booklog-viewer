@@ -5,8 +5,8 @@ export class TableData {
     public dataSets: TableDataRow[];
     public sumRow: TableDataRow;
     
-    constructor(private items: BooklogItem[]) {
-       this.labels = this.createMonthLabels();
+    constructor(private items: BooklogItem[], now: Date) {
+       this.labels = this.createMonthLabels(now);
        this.dataSets = this.createDataSets();
        this.sumRow = this.summariseDataRow();
     }
@@ -14,13 +14,12 @@ export class TableData {
     /**
      * 配列内に存在する最古から現在時点までの月ラベルを作成する
      */
-    private createMonthLabels(): string[] {
+    private createMonthLabels(toDate: Date): string[] {
         const labels: string[] = [];
 
         const oldestDate = new Date(this.items[0]?.createAt);
-        const now = new Date();
         let currentDate = new Date(oldestDate.getFullYear(), oldestDate.getMonth(), 1);
-        while (currentDate < now) {
+        while (currentDate < toDate) {
             const month = ('00' + (currentDate.getMonth() + 1)).slice(-2)
             labels.push(`${currentDate.getFullYear()}-${month}`);
             currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);

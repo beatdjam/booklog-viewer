@@ -7,7 +7,7 @@ export class TableViewModel {
     public tableData: TableData;
 
     constructor(items: BooklogItem[]) {
-        this.tableData = new TableData(items);
+        this.tableData = new TableData(items, new Date());
         this.headers = this.createHeader(this.tableData.labels);
     }
 
