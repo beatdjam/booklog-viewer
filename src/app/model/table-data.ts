@@ -1,4 +1,4 @@
-import {BooklogItem} from "./BooklogItem";
+import {BooklogItem} from "./booklog-item";
 
 export class TableData {
     public labels: string[];

@@ -1,5 +1,5 @@
 import {ChartData} from "chart.js";
-import {BooklogItem} from "../../model/BooklogItem";
+import {BooklogItem} from "../../model/booklog-item";
 
 export class StatusCountViewModel {
     public chartData: ChartData;

@@ -1,5 +1,5 @@
 import {StatusCountViewModel} from "../../../../src/app/feature/status-count/status-count.viewmodel";
-import {BooklogItem} from "../../../../src/app/model/BooklogItem";
+import {BooklogItem} from "../../../../src/app/model/booklog-item";
 
 describe('StatusCountViewModel', () => {
     it('BooklogItem[]からグラフ表示用のデータが生成できる', () => {

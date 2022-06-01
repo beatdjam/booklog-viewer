@@ -1,6 +1,6 @@
-import {HeaderLabel} from "../../model/HeaderLabel";
-import {TableData} from "../../model/TableData";
-import {BooklogItem} from "../../model/BooklogItem";
+import {HeaderLabel} from "../../model/header-label";
+import {TableData} from "../../model/table-data";
+import {BooklogItem} from "../../model/booklog-item";
 
 export class TableViewModel {
     public headers: HeaderLabel[]
