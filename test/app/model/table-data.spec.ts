@@ -2,7 +2,7 @@ import {BooklogItem} from "../../../src/app/model/booklog-item";
 import {TableData} from "../../../src/app/model/table-data";
 
 describe('TableData', () => {
-    it('BooklogItem[]から描画用のデータが生成できる', () => {
+    describe('BooklogItem[]から描画用のデータが生成できる', () => {
         const booklogItems: BooklogItem[] = [
             new BooklogItem(
                 "1",
@@ -81,53 +81,61 @@ describe('TableData', () => {
                 "480"
             )
         ];
-        const actual = new TableData(booklogItems, new Date(2021, 2, 1));
-        const expectedLabel = [
-            '2020-02',
-            '2020-03',
-            '2020-04',
-            '2020-05',
-            '2020-06',
-            '2020-07',
-            '2020-08',
-            '2020-09',
-            '2020-10',
-            '2020-11',
-            '2020-12',
-            '2021-01',
-            '2021-02'
-        ];
 
-        const expectedDataSets = [
-            {
-                data: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                label: '積読',
-                stack: 'a',
-                sum: 1
-            },
-            {
-                data: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                label: '未設定',
-                stack: 'a',
-                sum: 1
-            },
-            {
-                data: [0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-                label: '読み終わった',
-                stack: 'a',
-                sum: 2
-            }
-        ];
+        it('BooklogItemの最古の日付から入力された日付までの年月ラベルが生成される', () => {
+            const actual = new TableData(booklogItems, new Date(2021, 2, 1));
+            const expectedLabel = [
+                '2020-02',
+                '2020-03',
+                '2020-04',
+                '2020-05',
+                '2020-06',
+                '2020-07',
+                '2020-08',
+                '2020-09',
+                '2020-10',
+                '2020-11',
+                '2020-12',
+                '2021-01',
+                '2021-02'
+            ];
+            expect(actual.labels).toEqual(expectedLabel);
+        });
 
-        const expectedSumRow = {
-            data: [2, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-            label: '',
-            stack: '',
-            sum: 4
-        };
+        it('BooklogItemのステータスごとの集計結果が生成される', () => {
+            const actual = new TableData(booklogItems, new Date(2021, 2, 1));
+            const expectedDataSets = [
+                {
+                    data: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    label: '積読',
+                    stack: 'a',
+                    sum: 1
+                },
+                {
+                    data: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    label: '未設定',
+                    stack: 'a',
+                    sum: 1
+                },
+                {
+                    data: [0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+                    label: '読み終わった',
+                    stack: 'a',
+                    sum: 2
+                }
+            ];
+            expect(actual.dataSets).toEqual(expectedDataSets);
+        });
 
-        expect(actual.labels).toEqual(expectedLabel);
-        expect(actual.dataSets).toEqual(expectedDataSets);
-        expect(actual.sumRow).toEqual(expectedSumRow);
+        it('BooklogItemの集計結果の合計行が生成される', () => {
+            const actual = new TableData(booklogItems, new Date(2021, 2, 1));
+            const expectedSumRow = {
+                data: [2, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+                label: '',
+                stack: '',
+                sum: 4
+            };
+            expect(actual.sumRow).toEqual(expectedSumRow);
+        });
     });
 });
