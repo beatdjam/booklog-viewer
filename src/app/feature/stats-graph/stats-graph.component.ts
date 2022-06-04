@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {filter, map} from "rxjs";
 import {BooklogItemsQuery} from "../../state/booklog-items/booklog-items.query";
 import {StatusGraphViewModel} from "./status-graph.viewmodel";
@@ -8,7 +8,7 @@ import {StatusGraphViewModel} from "./status-graph.viewmodel";
     templateUrl: './stats-graph.component.html',
     styleUrls: ['./stats-graph.component.scss']
 })
-export class StatsGraphComponent implements OnInit {
+export class StatsGraphComponent {
     state$ = this.booklogItemsQuery.selectAll()
         .pipe(
             filter(items => items.length > 0),
@@ -16,9 +16,6 @@ export class StatsGraphComponent implements OnInit {
         );
 
     constructor(private booklogItemsQuery: BooklogItemsQuery) {
-    }
-
-    ngOnInit(): void {
     }
 }
 

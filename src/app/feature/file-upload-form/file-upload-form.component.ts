@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {parse} from "csv-parse/sync";
 import {Item} from "./file-upload-form.model";
@@ -9,7 +9,7 @@ import {BooklogItemsStore} from "../../state/booklog-items/booklog-items.store";
     templateUrl: './file-upload-form.component.html',
     styleUrls: ['./file-upload-form.component.scss']
 })
-export class FileUploadFormComponent implements OnInit {
+export class FileUploadFormComponent {
     form = this.fb.group({file: ['', [Validators.required]]});
     file: File | null = null;
 
@@ -18,9 +18,6 @@ export class FileUploadFormComponent implements OnInit {
 
     get f() {
         return this.form.controls;
-    }
-
-    ngOnInit() {
     }
 
     onFileChange(event: any) {

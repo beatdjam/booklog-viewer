@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {filter, map} from "rxjs";
 import {BooklogItemsQuery} from "../../state/booklog-items/booklog-items.query";
 import {TableViewModel} from "./table.viewmodel";
@@ -8,7 +8,7 @@ import {TableViewModel} from "./table.viewmodel";
     templateUrl: './table.component.html',
     styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
     state$ = this.booklogItemsQuery.selectAll()
         .pipe(
             filter(items => items.length > 0),
@@ -16,8 +16,5 @@ export class TableComponent implements OnInit {
         );
 
     constructor(private booklogItemsQuery: BooklogItemsQuery) {
-    }
-
-    ngOnInit(): void {
     }
 }
