@@ -14,8 +14,18 @@ import {TableComponent} from './feature/table/table.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {MatNativeDateModule} from "@angular/material/core";
+import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule, NativeDateAdapter} from "@angular/material/core";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+
+class MyDateAdapter extends NativeDateAdapter {
+    override getDateNames(): string[] {
+        const dateNames: string[] = [];
+        for (let i = 0; i < 31; i++) {
+            dateNames[i] = String(i + 1);
+        }
+        return dateNames;
+    }
+}
 
 @NgModule({
     declarations: [
@@ -37,7 +47,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
         MatDatepickerModule,
         MatNativeDateModule
     ],
-    providers: [],
+    providers: [{provide: MAT_DATE_LOCALE, useValue: 'ja-JP'}, {provide: DateAdapter, useClass: MyDateAdapter},],
     bootstrap: [AppComponent]
 })
 export class AppModule {
