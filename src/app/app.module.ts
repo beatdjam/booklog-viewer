@@ -14,18 +14,9 @@ import {TableComponent} from './feature/table/table.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule, NativeDateAdapter} from "@angular/material/core";
+import {MatNativeDateModule} from "@angular/material/core";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-
-class MyDateAdapter extends NativeDateAdapter {
-    override getDateNames(): string[] {
-        const dateNames: string[] = [];
-        for (let i = 0; i < 31; i++) {
-            dateNames[i] = String(i + 1);
-        }
-        return dateNames;
-    }
-}
+import {DatePickerComponent} from './feature/date-picker/date-picker.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +24,8 @@ class MyDateAdapter extends NativeDateAdapter {
         FileUploadFormComponent,
         StatusCountComponent,
         StatsGraphComponent,
-        TableComponent
+        TableComponent,
+        DatePickerComponent
     ],
     imports: [
         environment.production ? [] : AkitaNgDevtools.forRoot(),
@@ -47,7 +39,7 @@ class MyDateAdapter extends NativeDateAdapter {
         MatDatepickerModule,
         MatNativeDateModule
     ],
-    providers: [{provide: MAT_DATE_LOCALE, useValue: 'ja-JP'}, {provide: DateAdapter, useClass: MyDateAdapter},],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {
