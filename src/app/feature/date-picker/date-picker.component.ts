@@ -1,11 +1,6 @@
 import {Component} from '@angular/core';
-import {DateAdapter, MAT_DATE_LOCALE, NativeDateAdapter} from "@angular/material/core";
-
-class MyDateAdapter extends NativeDateAdapter {
-    override getDateNames(): string[] {
-        return [...Array(31).keys()].map(i => String(i + 1));
-    }
-}
+import {DateAdapter, MAT_DATE_LOCALE} from "@angular/material/core";
+import {MyDateAdapter} from "./my-date.adapter";
 
 @Component({
     selector: 'app-date-picker',
@@ -17,6 +12,11 @@ class MyDateAdapter extends NativeDateAdapter {
     ],
 })
 export class DatePickerComponent {
+    // FIXME Rangeの入力を取得
+    dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
+        console.log(dateRangeStart.value);
+        console.log(dateRangeEnd.value);
+    }
 }
 
 
