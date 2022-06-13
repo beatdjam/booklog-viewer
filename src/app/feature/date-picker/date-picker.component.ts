@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {DateAdapter, MAT_DATE_LOCALE} from "@angular/material/core";
 import {MyDateAdapter} from "./my-date.adapter";
 
@@ -12,11 +12,14 @@ import {MyDateAdapter} from "./my-date.adapter";
     ],
 })
 export class DatePickerComponent {
-    // FIXME Rangeの入力を取得
+    @Output() dateRange: EventEmitter<DateRange> = new EventEmitter<DateRange>();
     dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
-        console.log(dateRangeStart.value);
-        console.log(dateRangeEnd.value);
+        this.dateRange.emit({start: dateRangeStart.value, end:dateRangeEnd.value})
     }
 }
 
+export type DateRange = {
+    start: string,
+    end: string
+}
 

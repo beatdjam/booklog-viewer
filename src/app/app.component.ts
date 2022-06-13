@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {DateRange} from "./feature/date-picker/date-picker.component";
 
 @Component({
     selector: 'app-root',
@@ -11,6 +12,10 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    dateChange($event: DateRange) {
+        console.log($event);
     }
 }
 
