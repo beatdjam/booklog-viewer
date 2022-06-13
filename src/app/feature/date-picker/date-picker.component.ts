@@ -14,7 +14,9 @@ import {MyDateAdapter} from "./my-date.adapter";
 export class DatePickerComponent {
     @Output() dateRange: EventEmitter<DateRange> = new EventEmitter<DateRange>();
     dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
-        this.dateRange.emit({start: dateRangeStart.value, end:dateRangeEnd.value})
+        if(!!dateRangeStart.value && !!dateRangeEnd.value) {
+            this.dateRange.emit({start: dateRangeStart.value, end:dateRangeEnd.value})
+        }
     }
 }
 
