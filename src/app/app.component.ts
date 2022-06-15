@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DateRange} from "./feature/date-picker/date-picker.component";
+import {DateRange} from "./ui/date-picker/date-picker.component";
 
 @Component({
     selector: 'app-root',

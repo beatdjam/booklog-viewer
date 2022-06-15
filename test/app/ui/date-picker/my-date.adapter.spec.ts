@@ -1,4 +1,4 @@
-import {MyDateAdapter} from "../../../../src/app/feature/date-picker/my-date.adapter";
+import {MyDateAdapter} from "../../../../src/app/ui/date-picker/my-date.adapter";
 
 describe("MyDateAdapter", () => {
     describe("#getDataNames", () => {

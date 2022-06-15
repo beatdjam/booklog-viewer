@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileUploadFormComponent } from '../../../../src/app/feature/file-upload-form/file-upload-form.component';
+import { FileUploadFormComponent } from '../../../../src/app/ui/file-upload-form/file-upload-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('FileUploadFormComponent', () => {

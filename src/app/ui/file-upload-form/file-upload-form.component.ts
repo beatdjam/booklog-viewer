@@ -26,6 +26,7 @@ export class FileUploadFormComponent {
         }
     }
 
+    // TODO fileのsubmit以降の処理を剥がしてuiの責務だけにする
     submit() {
         this.readAsText(this.file!).then(result => this.itemStore.set(this.parseCSV(result)));
     }

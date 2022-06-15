@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {environment} from "../environments/environment";
 import {AkitaNgDevtools} from "@datorama/akita-ngdevtools";
 import {ReactiveFormsModule} from "@angular/forms";
-import {FileUploadFormComponent} from './feature/file-upload-form/file-upload-form.component';
+import {FileUploadFormComponent} from './ui/file-upload-form/file-upload-form.component';
 import {StatusCountComponent} from './feature/status-count/status-count.component';
 import {NgChartsModule} from "ng2-charts";
 import {StatsGraphComponent} from './feature/stats-graph/stats-graph.component';
@@ -16,7 +16,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {DatePickerComponent} from './feature/date-picker/date-picker.component';
+import {DatePickerComponent} from './ui/date-picker/date-picker.component';
 
 @NgModule({
     declarations: [
