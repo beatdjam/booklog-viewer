@@ -1,4 +1,4 @@
-<app-file-upload-form></app-file-upload-form>
+<app-file-upload-form (fileString)="uploadFile($event)"></app-file-upload-form>
 <app-status-count></app-status-count>
 <app-date-picker (dateRange)="dateChange($event)"></app-date-picker>
 <app-stats-graph></app-stats-graph>
