@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {DateRange} from "./ui/date-picker/date-picker.component";
 import {parse} from "csv-parse/sync";
 import {Item} from "./ui/file-upload-form/file-upload-form.model";
@@ -9,12 +9,9 @@ import {BooklogItemsStore} from "./state/booklog-items/booklog-items.store";
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
     constructor(private itemStore: BooklogItemsStore) {
-    }
-
-    ngOnInit() {
     }
 
     dateChange($event: DateRange) {
