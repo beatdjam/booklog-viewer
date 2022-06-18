@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-// FIXME: これを消すと何故かテストが動かなくなる
-import {parse} from "csv-parse/sync";
 
 @Component({
     selector: 'app-file-upload-form',

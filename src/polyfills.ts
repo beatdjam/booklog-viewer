@@ -51,11 +51,9 @@ import 'zone.js';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-
-// "global is not defined"の対応
 (window as any).global = window;
 // "Buffer is not defined"の対応
-global.Buffer = global.Buffer || require('buffer').Buffer;
+(window as any).Buffer = (window as any).Buffer || require('buffer').Buffer;
 (window as any).process = {
     env: { DEBUG: undefined },
     nextTick: function() {
