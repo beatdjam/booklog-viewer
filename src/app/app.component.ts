@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {DateRange} from "./ui/date-picker/date-picker.component";
 import {parse} from "csv-parse/sync";
-import {Item} from "./ui/file-upload-form/file-upload-form.model";
 import {BooklogItemsStore} from "./state/booklog-items/booklog-items.store";
+import {BooklogItem} from "./model/booklog-item";
 
 @Component({
     selector: 'app-root',
@@ -25,11 +25,11 @@ export class AppComponent {
     }
 
     // TODO エラーハンドリング
-    private parseCSV(result: string): Item[] {
+    private parseCSV(result: string): BooklogItem[] {
         try {
             const records = parse(result) as string[][];
             return records.map(record => {
-                return new Item(
+                return new BooklogItem(
                     record[0],
                     record[1],
                     record[2],
@@ -39,12 +39,12 @@ export class AppComponent {
                     record[6],
                     record[7],
                     record[8],
-                    record[9],
-                    record[10],
+                    new Date(record[9]),
+                    new Date(record[10]),
                     record[11],
                     record[12],
                     record[13],
-                    record[14],
+                    new Date(record[14]),
                     record[15],
                     record[16],
                 )

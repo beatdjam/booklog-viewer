@@ -4,11 +4,11 @@ export class TableData {
     public labels: string[];
     public dataSets: TableDataRow[];
     public sumRow: TableDataRow;
-    
+
     constructor(private items: BooklogItem[], now: Date) {
-       this.labels = this.createMonthLabels(now);
-       this.dataSets = this.createDataSets();
-       this.sumRow = this.summariseDataRow();
+        this.labels = this.createMonthLabels(now);
+        this.dataSets = this.createDataSets();
+        this.sumRow = this.summariseDataRow();
     }
 
     /**
@@ -35,7 +35,12 @@ export class TableData {
         const datasetLabels = [...new Set(this.items.map(item => item.status))];
         return datasetLabels.map(datasetLabel => {
             const filteredByStatus = this.items.filter(item => item.status === datasetLabel);
-            const data = this.labels.map(label => filteredByStatus.filter(item => item.createAt.indexOf(label) === 0).length);
+            const data = this.labels.map(label =>
+                filteredByStatus.filter(item => {
+                    const month = ('00' + (item.createAt.getMonth() + 1)).slice(-2)
+                    return `${item.createAt.getFullYear()}-${month}`.indexOf(label) === 0
+                }).length
+            );
             return {
                 data: data,
                 label: datasetLabel,
@@ -66,4 +71,5 @@ export class TableData {
         };
     }
 }
+
 type TableDataRow = { data: number[]; label: string; stack: string; sum: number };
