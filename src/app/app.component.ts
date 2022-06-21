@@ -20,39 +20,37 @@ export class AppComponent {
     }
 
     uploadFile($event: string) {
-        // TODO エラー時の通知考える
-        this.itemStore.set(this.parseCSV($event));
+        try {
+            this.itemStore.set(this.parseCSV($event));
+        } catch (e) {
+            // FIXME エラー時はトーストとか出したいけど暫定的にalert
+            alert(e);
+        }
     }
 
-    // TODO エラーハンドリング
     private parseCSV(result: string): BooklogItem[] {
-        try {
-            const records = parse(result) as string[][];
-            return records.map(record => {
-                return new BooklogItem(
-                    record[0],
-                    record[1],
-                    record[2],
-                    record[3],
-                    record[4],
-                    record[5],
-                    record[6],
-                    record[7],
-                    record[8],
-                    new Date(record[9]),
-                    new Date(record[10]),
-                    record[11],
-                    record[12],
-                    record[13],
-                    new Date(record[14]),
-                    record[15],
-                    record[16],
-                )
-            });
-        } catch (e) {
-            console.log(e);
-            throw e;
-        }
+        const records = parse(result) as string[][];
+        return records.map(record => {
+            return new BooklogItem(
+                record[0],
+                record[1],
+                record[2],
+                record[3],
+                record[4],
+                record[5],
+                record[6],
+                record[7],
+                record[8],
+                new Date(record[9]),
+                new Date(record[10]),
+                record[11],
+                record[12],
+                record[13],
+                new Date(record[14]),
+                record[15],
+                record[16],
+            )
+        });
     }
 }
 
