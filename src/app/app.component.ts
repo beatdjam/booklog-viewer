@@ -10,12 +10,14 @@ import {BooklogItem} from "./model/booklog-item";
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+    dateRange: DateRange | null = null;
 
     constructor(private itemStore: BooklogItemsStore) {
     }
 
     dateChange($event: DateRange) {
         // TODO DatePickerの変更を受け取る
+        this.dateRange = $event;
         console.log($event);
     }
 
