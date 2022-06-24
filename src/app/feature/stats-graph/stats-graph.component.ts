@@ -1,5 +1,5 @@
 import {Component, Input, SimpleChanges} from '@angular/core';
-import {filter, map} from "rxjs";
+import {filter, map, Subject, combineLatest} from "rxjs";
 import {BooklogItemsQuery} from "../../state/booklog-items/booklog-items.query";
 import {StatusGraphViewModel} from "./status-graph.viewmodel";
 import {DateRange} from "../../ui/date-picker/date-picker.component";
@@ -10,7 +10,6 @@ import {DateRange} from "../../ui/date-picker/date-picker.component";
     styleUrls: ['./stats-graph.component.scss']
 })
 export class StatsGraphComponent {
-    // TODO 外から値は渡せるようになったけど変更を検知できてない
     state$ = this.booklogItemsQuery.selectAll()
         .pipe(
             filter(items => items.length > 0),
@@ -26,8 +25,13 @@ export class StatsGraphComponent {
 
     @Input() dateRange: DateRange | null = null;
 
-
     constructor(private booklogItemsQuery: BooklogItemsQuery) {
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        // TODO 検知した変更をstateに流す
+        const dateRange = changes['dateRange'].currentValue as DateRange | null;
+        console.log(dateRange);
     }
 }
 
