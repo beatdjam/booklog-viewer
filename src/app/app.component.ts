@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {DateRange} from "./ui/date-picker/date-picker.component";
 import {parse} from "csv-parse/sync";
 import {BooklogItemsStore} from "./state/booklog-items/booklog-items.store";
 import {BooklogItem} from "./model/booklog-item";
+import {DateRange} from "./ui/date-picker/date-range";
 
 @Component({
     selector: 'app-root',

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {DateAdapter, MAT_DATE_LOCALE} from "@angular/material/core";
 import {MyDateAdapter} from "./my-date.adapter";
+import {DateRange} from "./date-range";
 
 @Component({
     selector: 'app-date-picker',
@@ -18,19 +19,6 @@ export class DatePickerComponent {
         if (!!dateRangeStart.value && !!dateRangeEnd.value) {
             this.dateRange.emit(new DateRange(dateRangeStart.value, dateRangeEnd.value));
         }
-    }
-}
-
-export class DateRange {
-    constructor(private _start: string, private _end: string) {
-    }
-
-    get start(): Date {
-        return new Date(this._start);
-    }
-
-    get end(): Date {
-        return new Date(this._end);
     }
 }
 
