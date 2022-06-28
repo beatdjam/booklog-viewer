@@ -13,12 +13,16 @@ import {DateRange} from "./date-range";
     ],
 })
 export class DatePickerComponent {
-    @Output() dateRange: EventEmitter<DateRange> = new EventEmitter<DateRange>();
+    @Output() dateRange: EventEmitter<DateRange | null> = new EventEmitter<DateRange | null>();
 
     dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
         if (!!dateRangeStart.value && !!dateRangeEnd.value) {
             this.dateRange.emit(new DateRange(dateRangeStart.value, dateRangeEnd.value));
         }
+    }
+
+    reset() {
+        this.dateRange.emit(null);
     }
 }
 

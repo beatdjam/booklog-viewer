@@ -15,7 +15,7 @@ export class AppComponent {
     constructor(private itemStore: BooklogItemsStore) {
     }
 
-    dateChange($event: DateRange) {
+    dateChange($event: DateRange | null) {
         this.dateRange = $event;
     }
 
