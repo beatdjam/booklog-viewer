@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {environment} from "../environments/environment";
 import {AkitaNgDevtools} from "@datorama/akita-ngdevtools";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FileUploadFormComponent} from './ui/file-upload-form/file-upload-form.component';
 import {StatusCountComponent} from './feature/status-count/status-count.component';
 import {NgChartsModule} from "ng2-charts";
@@ -37,7 +37,8 @@ import {DatePickerComponent} from './ui/date-picker/date-picker.component';
         MatFormFieldModule,
         MatInputModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
