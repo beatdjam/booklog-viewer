@@ -5,8 +5,8 @@ export class TableData {
     public dataSets: TableDataRow[];
     public sumRow: TableDataRow;
 
-    constructor(private items: BooklogItem[], now: Date) {
-        this.labels = this.createMonthLabels(now);
+    constructor(private items: BooklogItem[], toDate: Date) {
+        this.labels = this.createMonthLabels(toDate);
         this.dataSets = this.createDataSets();
         this.sumRow = this.summariseDataRow();
     }
