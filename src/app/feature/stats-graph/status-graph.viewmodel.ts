@@ -5,6 +5,7 @@ import {TableData} from "../../model/table-data";
 export class StatusGraphViewModel {
     public chartData: ChartData;
 
+    // TODO データが0件のときの表示考える
     constructor(items: BooklogItem[]) {
         const tableData = new TableData(items, new Date());
         this.chartData = {

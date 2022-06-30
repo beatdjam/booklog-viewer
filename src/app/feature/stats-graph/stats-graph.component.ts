@@ -14,7 +14,7 @@ export class StatsGraphComponent {
     state$ = combineLatest([this.booklogItemsQuery.selectAll(), this.dateRangeSubject.asObservable()])
         .pipe(
             map(([items, dateRange]) => items.filter(item => dateRange === null || (dateRange.start <= item.createAt && item.createAt <= dateRange.end))),
-            map(items => new StatusGraphViewModel(items)) // TODO toDateを渡す
+            map(items => new StatusGraphViewModel(items))
         )
     @Input() dateRange: DateRange | null = null;
 

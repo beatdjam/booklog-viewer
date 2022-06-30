@@ -6,6 +6,7 @@ export class TableViewModel {
     public headers: HeaderLabel[]
     public tableData: TableData;
 
+    // TODO データが0件のときの表示考える
     constructor(items: BooklogItem[]) {
         this.tableData = new TableData(items, new Date());
         this.headers = this.createHeader(this.tableData.labels);
