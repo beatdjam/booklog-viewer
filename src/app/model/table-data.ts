@@ -1,23 +1,24 @@
 import {BooklogItem} from "./booklog-item";
 
+type SummaryTarget = "createAt" | "readAt"
 export class TableData {
     public labels: string[];
     public dataSets: TableDataRow[];
     public sumRow: TableDataRow;
 
-    constructor(private items: BooklogItem[], toDate: Date) {
-        this.labels = this.createMonthLabels(toDate);
-        this.dataSets = this.createDataSets();
+    constructor(private items: BooklogItem[], now: Date, target: SummaryTarget= "createAt") {
+        this.labels = this.createMonthLabels(now, target);
+        this.dataSets = this.createDataSets(target);
         this.sumRow = this.summariseDataRow();
     }
 
     /**
      * 配列内に存在する最古から現在時点までの月ラベルを作成する
      */
-    private createMonthLabels(toDate: Date): string[] {
+    private createMonthLabels(toDate: Date, target: SummaryTarget): string[] {
         const labels: string[] = [];
 
-        const oldestDate = new Date(this.items[0]?.createAt);
+        const oldestDate = target === "createAt" ? new Date(this.items[0]?.createAt) : new Date(this.items[0]?.createAt);
         let currentDate = new Date(oldestDate.getFullYear(), oldestDate.getMonth(), 1);
         while (currentDate < toDate) {
             const month = ('00' + (currentDate.getMonth() + 1)).slice(-2)
@@ -30,15 +31,16 @@ export class TableData {
     /**
      * 月・ステータス別のデータセットを作成する
      */
-    private createDataSets(): TableDataRow[] {
+    private createDataSets(target: SummaryTarget): TableDataRow[] {
         // statusの一覧
-        const datasetLabels = [...new Set(this.items.map(item => item.status))];
+        const datasetLabels = target === "createAt" ? [...new Set(this.items.map(item => item.status))] : ["読み終わった"];
         return datasetLabels.map(datasetLabel => {
             const filteredByStatus = this.items.filter(item => item.status === datasetLabel);
             const data = this.labels.map(label =>
                 filteredByStatus.filter(item => {
-                    const month = ('00' + (item.createAt.getMonth() + 1)).slice(-2)
-                    return `${item.createAt.getFullYear()}-${month}`.indexOf(label) === 0
+                    const targetDate = target === "createAt" ? item.createAt : item.readAt;
+                    const month = ('00' + (targetDate.getMonth() + 1)).slice(-2)
+                    return `${targetDate.getFullYear()}-${month}`.indexOf(label) === 0
                 }).length
             );
             return {
